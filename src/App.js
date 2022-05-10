@@ -7,17 +7,17 @@ import { Home } from 'containers/home';
 import ProtectedRoute from 'layout/ProtectedRoute';
 
 function App() {
-  // const { token } = useSelector(state => state.app)
+  const { token } = useSelector(state => state?.app)
   return (
     <Suspense fallback="loading">
       <div className="App">
-        {/* {!token && */}
+        {!token &&
         <Routes>
-          <Route exact path="login" element={<Login />} />
+          <Route exact path="/" element={<Login />} />
           {/* <Route exact path="*" element={<Navigate to="/" />} /> */}
         </Routes>
-        {/* } */}
-        {/* {token && */}
+        }
+        {token &&
         <Routes>
           <Route
             path="/"
@@ -28,7 +28,7 @@ function App() {
             }
           />
         </Routes>
-        {/* } */}
+        }
       </div>
     </Suspense>
   );
