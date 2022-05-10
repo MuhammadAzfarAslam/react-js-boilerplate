@@ -4,24 +4,31 @@ import { Route, Link, Routes, Navigate } from "react-router-dom"
 import { useSelector } from 'react-redux';
 import { Login } from 'containers/login';
 import { Home } from 'containers/home';
+import ProtectedRoute from 'layout/ProtectedRoute';
 
 function App() {
   // const { token } = useSelector(state => state.app)
   return (
     <Suspense fallback="loading">
       <div className="App">
-        Hello World
         {/* {!token && */}
-          <Routes>
-            <Route exact path="login" element={<Login />} />
-            {/* <Route exact path="*" element={<Navigate to="/" />} /> */}
-          </Routes>
-          {/* } */}
+        <Routes>
+          <Route exact path="login" element={<Login />} />
+          {/* <Route exact path="*" element={<Navigate to="/" />} /> */}
+        </Routes>
+        {/* } */}
         {/* {token && */}
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-          </Routes>
-          {/* } */}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+        {/* } */}
       </div>
     </Suspense>
   );
